@@ -7,9 +7,7 @@ alias: reference-functions-userexists.html
 tags: [reference, system functions, functions, userexists]
 ---
 
-**Prototype:** `userexists(user)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(user)%]
 
 **Description:** Return whether `user` name or numerical id exists on this 
 host.
@@ -17,9 +15,7 @@ host.
 Checks whether the user is in the password database for the current host. The
 argument must be a user name or user id.
 
-**Arguments**:
-
-* `user` : User name or identifier, in the range `.*`
+[%CFEngine_function_attributes(user)%]
 
 **Example:**
 

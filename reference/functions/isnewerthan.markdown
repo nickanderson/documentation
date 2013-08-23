@@ -7,9 +7,7 @@ alias: reference-functions-isnewerthan.html
 tags: [reference, files functions, functions, isnewerthan]
 ---
 
-**Prototype:** `isnewerthan(newer, older)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(newer, older)%]
 
 **Description:** Returns whether the file `newer` is newer (modified later) 
 than the file `older`.
@@ -17,10 +15,7 @@ than the file `older`.
 This function compares the modification time (mtime) of the files, referring 
 to changes of content only.
 
-**Arguments**:
-
-* `arg1` : Newer file name, in the range `"?(/.*)`
-* `arg2` : Older file name, in the range `"?(/.*)`
+[%CFEngine_function_attributes(newer, older)%]
 
 **Example:**
 

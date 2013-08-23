@@ -7,20 +7,14 @@ alias: reference-functions-shuffle.html
 tags: [reference, data functions, functions, shuffle]
 ---
 
-**Prototype:** `shuffle(list, seed)`
-
-**Return type:** `slist`
+[%CFEngine_function_prototype(list, seed)%]
 
 **Description:** Return `list` shuffled with `seed`.
 
 The same seed will produce the same shuffle every time. For a random shuffle, 
 provide a random seed with the `randomint` function.
 
-**Arguments**:
-
-* `list` : The name of the list variable, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
-* `seed` : Shuffle seed in the range `.*`
+[%CFEngine_function_attributes(list, seed)%]
 
 **Example:**
 

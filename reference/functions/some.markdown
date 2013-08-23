@@ -7,18 +7,12 @@ alias: reference-functions-some.html
 tags: [reference, data functions, functions, some]
 ---
 
-**Prototype:** `some(regex, list)`
+[%CFEngine_function_prototype(regex, list)%]
 
-**Return type:** `class`
+**Description:** Return whether any element of `list` matches the 
+[Unanchored][unanchored] regular expression `regex`.
 
-**Description:** Return whether any element of the list matches the regular 
-expression.
-
-**Arguments**:
-
-* `regex` : [Unanchored][unanchored] regular expression to find, in the range `.*`
-* `list` : The name of the list variable to check, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
+[%CFEngine_function_attributes(regex, list)%]
 
 **Example:**
 

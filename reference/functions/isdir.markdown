@@ -7,17 +7,13 @@ alias: reference-functions-isdir.html
 tags: [reference, files functions, functions, isdir]
 ---
 
-**Prototype:** `isdir(filename)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(filename)%]
 
 **Description:** Returns whether the named object `filename` is a directory.
 
 The CFEngine process must have access to `filename` in order for this to work.
 
-**Arguments**:
-
-* `filename` : File object name, in the range `"?(/.*)`
+[%CFEngine_function_attributes(filename)%]
 
 **Example:**
 

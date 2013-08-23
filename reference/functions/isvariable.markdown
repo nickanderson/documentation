@@ -7,19 +7,14 @@ alias: reference-functions-isvariable.html
 tags: [reference, utility functions, functions, isvariable]
 ---
 
-**Prototype:** `isvariable(var)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(var)%]
 
 **Description:** Returns whether a variable named `var` is defined.
 
 The variable need only exist. This says nothing about its value. Use
 `regcmp` to check variable values.
 
-**Arguments**:
-
-* `var` : Variable identifier, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
+[%CFEngine_function_attributes(var)%]
 
 **Example:**
 

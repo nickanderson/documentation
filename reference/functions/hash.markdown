@@ -7,9 +7,7 @@ alias: reference-functions-hash.html
 tags: [reference, data functions, functions, hash]
 ---
 
-**Prototype:** `hash(input, algorithm)`
-
-**Return type:** `string`
+[%CFEngine_function_prototype(input, algorithm)%]
 
 **Description:** Return the hash of `input` using the hash `algorithm`.
 
@@ -18,16 +16,7 @@ to get the same answer from this function as you would from every other
 tool, since it depends on how whitespace and end of file characters are
 handled.
 
-**Arguments**:
-
-* `input` : Input text, in the range `.*`
-* `algorithm` : Hash or digest algorithm, one of
-  * md5
-  * sha1
-  * sha256
-  * sha512
-  * sha384
-  * crypt   
+[%CFEngine_function_attributes(input, algorithm)%]
 
 **Example:**
 

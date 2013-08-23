@@ -7,11 +7,9 @@ alias: reference-functions-translatepath.html
 tags: [reference, files functions, functions, translatepath]
 ---
 
-**Prototype:** `translatepath(path)`
+[%CFEngine_function_prototype(path)%]
 
-**Return type:** `string`
-
-**Description:** Translate path separators from Unix style to the host's 
+**Description:** Translate separators in `path` from Unix style to the host's 
 native style and returns the result.
 
 Takes a string argument with slashes as path separators and translate
@@ -19,9 +17,7 @@ these to the native format for path separators on the host. For example
 translatepath("a/b/c") would yield "a/b/c" on Unix platforms, but
 "a\\b\\c" on Windows.
 
-**Arguments**:
-
-* `path` : Unix style path, in the range `"?(/.*)`
+[%CFEngine_function_attributes(path)%]
 
 **Example:**
 

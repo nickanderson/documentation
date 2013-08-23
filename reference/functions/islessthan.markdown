@@ -7,19 +7,14 @@ alias: reference-functions-islessthan.html
 tags: [reference, data functions, functions, islessthan]
 ---
 
-**Prototype:** `islessthan(value1, value2)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(value1, value2)%]
 
 **Description:** Returns whether `value1` is less than `value2`.
 
 The comparison is made numerically if possible. If the values are
 strings, the result is the inverse to that of comparing with strcmp().
 
-**Arguments**:
-
-* `value1` : Smaller string or value, in the range `.*`
-* `value2` : Larger string or value, in the range `.*`
+[%CFEngine_function_attributes(value1, value2)%]
 
 **Example:**
 

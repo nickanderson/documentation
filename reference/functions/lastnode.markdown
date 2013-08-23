@@ -7,9 +7,7 @@ alias: reference-functions-lastnode.html
 tags: [reference, data functions, functions, lastnode]
 ---
 
-**Prototype:** `lastnode(string, separator)`
-
-**Return type:** `string`
+[%CFEngine_function_prototype(string, separator)%]
 
 **Description:** Returns the part of `string` after the last `separator`.
 
@@ -17,10 +15,7 @@ This function returns the final node in a chain, given a regular
 expression to split on. This is mainly useful for finding leaf-names of
 files, from a fully qualified path name.
 
-**Arguments**:
-
-* `string` : Input string, in the range `.*`
-* `separator` : Link separator, e.g. `/` or `:`, in the range `.*`
+[%CFEngine_function_attributes(string, separator)%]
 
 **Example:**
 

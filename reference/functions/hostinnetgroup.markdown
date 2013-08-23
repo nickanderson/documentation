@@ -7,15 +7,11 @@ alias: reference-functions-hostinnetgroup.html
 tags: [reference, system functions, functions, hostinnetgroup]
 ---
 
-**Prototype:** `hostinnetgroup(netgroup)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(netgroup)%]
 
 **Description:** True if the current host is in the named `netgroup`.
 
-**Arguments**:
-
-* `netgroup` : Netgroup name, in the range `.*`
+[%CFEngine_function_attributes(netgroup)%]
 
 **Example:**
 

@@ -7,19 +7,13 @@ alias: reference-functions-sort.html
 tags: [reference, data functions, functions, sort]
 ---
 
-**Prototype:** `sort(list, mode)`
-
-**Return type:** `slist`
+[%CFEngine_function_prototype(list, mode)%]
 
 **Description:** Returns `list` sorted according to `mode`.
 
 Only lexicographical sorting is supported currently.
 
-**Arguments**:
-
-* `list` : The name of the list variable, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
-* `mode` : Sorting mode, in the range `lex`
+[%CFEngine_function_attributes(regex, mode)%]
 
 **Example:**
 

@@ -7,20 +7,11 @@ alias: reference-functions-sublist.html
 tags: [reference, data functions, functions, sublist]
 ---
 
-**Prototype:** `sublist(list, head_or_tail, max_elements)`
-
-**Return type:** `slist`
+[%CFEngine_function_prototype(list, head_or_tail, max_elements)%]
 
 **Description:** Returns list of up to `max_elements` of `list`, obtained from head or tail depending on `head_or_tail`.
 
-**Arguments**:
-
-* `list` : The name of the list variable, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
-* `head_or_tail` : Whether to extract elements from the beginning or from the 
-end. in the range `head`, `tail`
-* `max_elements` : Maximum number of elements to return in the range 
-`0,999999999`
+[%CFEngine_function_attributes(list, head_or_tail, max_elements)%]
 
 **Example:**
 

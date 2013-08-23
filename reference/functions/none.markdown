@@ -7,18 +7,14 @@ alias: reference-functions-none.html
 tags: [reference, data functions, functions, none]
 ---
 
-**Prototype:** `none(regex, list)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(regex, list)%]
 
 **Description:** Returns whether no element in `list` matches the regular 
 expression `regex`.
 
-**Arguments**:
+[%CFEngine_function_attributes(regex, list)%]
 
-* `regex` : [Unanchored][unanchored] regular expression to find, in the range `.*`
-* `list` : The name of the list variable to check, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
+The regular expression is [unanchored][unanchored].
 
 **Example:**
 

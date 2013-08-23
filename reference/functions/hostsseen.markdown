@@ -7,9 +7,7 @@ alias: reference-functions-hostsseen.html
 tags: [reference, communication functions, functions, hostsseen]
 ---
 
-**Prototype:** `hostsseen(horizon, seen, field)`
-
-**Return type:** `slist`
+[%CFEngine_function_prototype(horizon, seen, field)%]
 
 **Description:** Returns a list with the information `field` of hosts that were seen or not seen within the last `horizon` hours.
 
@@ -18,15 +16,7 @@ within the number of hours specified in `horizon`. The argument `seen` may be
 lastseen or notseen, the latter selecting all hosts not observed to have 
 connected within the specified time.
 
-**Arguments**:
-
-* `horizon` : Horizon since last seen in hours, in the range `0,99999999999`
-* `seen` : Selection criteria, one of
-    * lastseen
-    * notseen   
-* `field` : Type of return value desired, one of
-    * name
-    * address   
+[%CFEngine_function_attributes(horizon, seen, field)%]
 
 **Example:**
 

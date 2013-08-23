@@ -7,21 +7,15 @@ alias: reference-functions-usemodule.html
 tags: [reference, utility functions, functions, usemodule]
 ---
 
-**Prototype:** `usemodule(name, args)`
+[%CFEngine_function_prototype(module, args)%]
 
-**Return type:** `class`
+**Description:** Execute CFEngine module script `module` with `args`, and 
+return whether successful.
 
-**Description:** Execute CFEngine module script `name` with `args` and return 
-whether successful.
+The module script is expected to be located in the registered modules 
+directory, `WORKDIR/modules`.
 
-**Arguments**:
-
-* `name` : Name of module command, in the range `.*`
-
-The name of the module without its leading path, since it is assumed to
-be in the registered modules directory, WORKDIR/modules.
-
-* `args` : Argument string for the module, in the range `.*`
+[%CFEngine_function_attributes(module, args)%]
 
 **Example:**
 

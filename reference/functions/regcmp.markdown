@@ -7,20 +7,12 @@ alias: reference-functions-regcmp.html
 tags: [reference, data functions, functions, regcmp]
 ---
 
-**Prototype:** `regcmp(regex, string)`
+[%CFEngine_function_prototype(regex, string)%]
 
-**Return type:** `class`
+**Description:** Returns whether the [anchored][anchored] regular expression 
+`regex` matches the `string.`
 
-**Description:** Returns whether the regular expression `regex` matches the 
-`string.`
-
-**Arguments**:
-
-* `regex` : Regular expression, in the range `.*`
-* `string` : Match string, in the range `.*`
-
-The regular expression is [anchored][anchored], meaning it must match the complete 
-content.
+[%CFEngine_function_attributes(regex, string)%]
 
 **Example:**
 

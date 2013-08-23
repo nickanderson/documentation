@@ -7,9 +7,7 @@ alias: reference-functions-sum.html
 tags: [reference, data functions, functions, sum]
 ---
 
-**Prototype:** `sum(list)`
-
-**Return type:** `real`
+[%CFEngine_function_prototype(list)%]
 
 **Description:** Return the sum of the reals in `list`.
 
@@ -17,10 +15,7 @@ This function might be used for simple ring computation. Of course, you could
 easily combine `sum` with `readstringarray` or `readreallist` etc., to collect 
 summary information from a source external to CFEngine.
 
-**Arguments**:
-
-* `list` : A list of arbitrary real values, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
+[%CFEngine_function_attributes(list)%]
 
 **Example:**
 

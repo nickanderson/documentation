@@ -7,18 +7,12 @@ alias: reference-functions-reglist.html
 tags: [reference, data functions, functions, reglist]
 ---
 
-**Prototype:** `reglist(list, regex)`
+[%CFEngine_function_prototype(list, regex)%]
 
-**Return type:** `class`
+**Description:** Returns whether the [anchored][anchored] regular expression 
+`regex` matches any item in `list`.
 
-**Description:** Returns whether the regular expression `regex` matches any item in `list`.
-
-**Arguments**:
-
-* `list` : list identifier, in the range `@[(][a-zA-Z0-9]+[)]`
-* `regex` : Regular expression, in the range `.*`
-
-The regular expression is [anchored][anchored], meaning it must match the entire string.
+[%CFEngine_function_attributes(list, regex)%]
 
 **Example:**
 

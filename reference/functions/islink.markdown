@@ -7,9 +7,7 @@ alias: reference-functions-islink.html
 tags: [reference, files functions, functions, islink]
 ---
 
-**Prototype:** `islink(filename)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(filename)%]
 
 **Description:** Returns whether the named object `filename` is a symbolic 
 link.
@@ -17,9 +15,7 @@ link.
 The link node must both exist and be a symbolic link. Hard links cannot
 be detected using this function.
 
-**Arguments**:
-
-* `filename` : File object name, in the range `"?(/.*)`
+[%CFEngine_function_attributes(filename)%]
 
 **Example:**
 

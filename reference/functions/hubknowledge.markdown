@@ -9,7 +9,7 @@ tags: [reference, communication functions, functions, hubknowledge]
 
 **This function is only available in CFEngine Enterprise.**
 
-**Prototype:** `hubknowledge(id)`
+[%CFEngine_function_prototype(id)%]
 
 **Description:** Read global knowledge from the CFEngine Database host by 
 `id`.
@@ -34,11 +34,7 @@ CFEngine Enterprise) then this will be returned preferentially. If no such
 variable is found, then the server will look for a literal string in a server 
 bundle with a handle that matches the requested object.
 
-**Return type:** `string`
-
-**Arguments**:
-
-* `id` : identifier, in the range `[a-zA-Z0-9_$(){}\[\].:]+`
+[%CFEngine_function_attributes(id)%]
 
 **Example:**
 

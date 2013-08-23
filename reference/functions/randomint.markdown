@@ -7,9 +7,7 @@ alias: reference-functions-randomint.html
 tags: [reference, data functions, functions, randomint]
 ---
 
-**Prototype:** `randomint(lower, upper)`
-
-**Return type:** `int`
+[%CFEngine_function_prototype(lower, upper)%]
 
 **Description:** Returns a random integer between `lower` and `upper`.
 
@@ -19,10 +17,7 @@ the entropy of the md5 algorithm.
 The function will be re-evaluated on each pass if it is not restricted with a
 context class expression as shown in the example.
 
-**Arguments**:
-
-* `lower` : Lower inclusive bound, in the range `-99999999999,9999999999`
-* `upper` : Upper inclusive bound, in the range `-99999999999,9999999999`
+[%CFEngine_function_attributes(lower, upper)%]
 
 **Example:**
 

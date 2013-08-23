@@ -7,9 +7,7 @@ alias: reference-functions-product.html
 tags: [reference, data functions, functions, product]
 ---
 
-**Prototype:** `product(list)`
-
-**Return type:** `real`
+[%CFEngine_function_prototype(list)%]
 
 **Description:** Returns the product of the reals in `list`.
 
@@ -17,10 +15,7 @@ This function might be used for simple ring computation. Of course, you could
 easily combine `product` with `readstringarray` or `readreallist` etc., to 
 collect summary information from a source external to CFEngine.
 
-**Arguments**:
-
-* `list` : A list of arbitrary real values, in the range 
-`[a-zA-Z0-9_$(){}\[\].:]+`
+[%CFEngine_function_attributes(list)%]
 
 **Example:**
 

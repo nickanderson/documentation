@@ -7,9 +7,7 @@ alias: reference-functions-host2ip.html
 tags: [reference, communication functions, functions, host2ip]
 ---
 
-**Prototype:** `host2ip(hostname)`
-
-**Return type:** `string`
+[%CFEngine_function_prototype(hostname)%]
 
 **Description:** Returns the primary name-service IP address for the named host `hostname`.
 
@@ -20,9 +18,7 @@ lookup procedure for a name, so it mimics internal processes and can
 therefore be used not only to cache multiple lookups in the configuration, but 
 to debug the behavior of the resolver.
 
-**Arguments**:
-
-* `hostname` : Host name in ascii, in the range `.*`
+[%CFEngine_function_attributes(hostname)%]
 
 **Example:**
 

@@ -7,9 +7,7 @@ alias: reference-functions-ip2host.html
 tags: [reference, communication functions, functions, ip2host]
 ---
 
-**Prototype:** `ip2host(ip)`
-
-**Return type:** `string`
+[%CFEngine_function_prototype(ip)%]
 
 **Description:** Returns the primary name-service host name for the IP address 
 `ip`.
@@ -21,9 +19,7 @@ if supported by the resolver library.
 Note that DNS lookups may take time and thus cause CFEngine agents to
 wait for responses, slowing their progress significantly.
 
-**Arguments**:
-
-* `ip` : IP address (IPv4 or IPv6), in the range `.*`
+[%CFEngine_function_attributes(ip)%]
 
 **Example:**
 

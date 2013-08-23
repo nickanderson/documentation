@@ -7,19 +7,11 @@ alias: reference-functions-intersection.html
 tags: [reference, data functions, functions, intersection]
 ---
 
-**Prototype:** `intersection(list1, list2)`
-
-**Return type:** `slist`
+[%CFEngine_function_prototype(list1, list2)%]
 
 **Description:** Returns the unique elements in list1 that are also in list2.
 
-**Arguments**:
-
-* `list1` : The name of the base list variable, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
-
-* `list2` : The name of the intersected list variable, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
+[%CFEngine_function_attributes(list1, list2)%]
 
 **Example:**
 

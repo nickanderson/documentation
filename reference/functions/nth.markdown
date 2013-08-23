@@ -7,20 +7,14 @@ alias: reference-functions-nth.html
 tags: [reference, data functions, functions, nth]
 ---
 
-**Prototype:** `nth(list, position)`
-
-**Return type:** `string`
+[%CFEngine_function_prototype(list, position)%]
 
 **Description:** Returns the element of `list` at zero-based `position`.
 
 If an invalid position (below 0 or above the size of the list minus 1)
 is requested, this function does not return a valid value.
 
-**Arguments**:
-
-* `list` : The name of the list variable, in the range
-`[a-zA-Z0-9_$(){}\[\].:]+`
-* `position` : Zero-based position of element in the range `0,999999999`
+[%CFEngine_function_attributes(list, position)%]
 
 **Example:**
 

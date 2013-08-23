@@ -513,7 +513,7 @@ settings for access control entry.
 `specify_default_aces` (optional) is a list of access control entries that are 
 set on child objects. It is also parsed from left to right and
 allows multiple entries with same entity-type and id. Only valid if 
-`acl_directory_inherit` is set to `specify`.
+`acl_default` is set to `specify`.
 
 This is an ACL which makes explicit setting for the acl inherited by new 
 objects within a directory. It is included for those implementations
@@ -2168,6 +2168,8 @@ You may specify arbitrarily complex file-matching parameters, such as what is
 shown above, "is owned by mark, has the extension '.pdf' or '.fdf', and whose 
 modification time is not between 1 day ago and now"; that is, it is older than 
 1 day.
+
+**See also:** `process_result`
 
 ### link_from
 

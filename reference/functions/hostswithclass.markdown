@@ -9,7 +9,7 @@ tags: [reference, communication functions, functions, hostswithclass]
 
 **This function is only available in CFEngine Enterprise.**
 
-**Prototype:** `hostswithclass(class, field)`
+[%CFEngine_function_prototype(class, field)%]
 
 **Description:** Returns a list from the CFEngine Database with the information `field` of hosts on which `classs` is set.
 
@@ -18,14 +18,7 @@ hostnames or ip-addresses of hosts that have a given class set. Note that this
 function only works locally on the hub, but allows the hub to construct custom 
 configuration files for (classes of) hosts.
 
-**Return type:** `slist`
-
-**Arguments**:
-
-* `class` : Class name to look for, in the range `[a-zA-Z0-9_]+`
-* `field` : Type of return value desired, one of
-    * name
-    * address   
+[%CFEngine_function_attributes(class, field)%]
 
 **Example:**
 

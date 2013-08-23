@@ -7,15 +7,11 @@ alias: reference-functions-isexecutable.html
 tags: [reference, files functions, functions, isexecutable]
 ---
 
-**Prototype:** `isexecutable(filaname)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(filename)%]
 
 **Description:** Returns whether the named object `filename` has execution rights for the current user.
 
-**Arguments**:
-
-* `filename` : File object name, in the range `"?(/.*)`
+[%CFEngine_function_attributes(filename)%]
 
 **Example:**
 

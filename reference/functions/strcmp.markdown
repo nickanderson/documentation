@@ -7,17 +7,12 @@ alias: reference-functions-strcmp.html
 tags: [reference, data functions, functions, strcmp]
 ---
 
-**Prototype:** `strcmp(string1, string2)`
-
-**Return type:** `class`
+[%CFEngine_function_prototype(string1, string2)%]
 
 **Description:** Returns whether the two strings `string1` and `string2` match 
 exactly.
 
-**Arguments**:
-
-* `string1` : The first string, in the range `.*`
-* `string2` : The second string, in the range `.*`
+[%CFEngine_function_attributes(string1, string2)%]
 
 **Example:**
 

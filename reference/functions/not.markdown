@@ -7,15 +7,11 @@ alias: reference-functions-not.html
 tags: [reference, data functions, functions, not]
 ---
 
-**Prototype:** `not(expression)`
-
-**Return type:** `string`
+[%CFEngine_function_prototype(expression)%]
 
 **Description:** Calculate whether `expression` is false
 
-**Arguments**:
-
-* `expression` : Class expression, in the range `.*`
+[%CFEngine_function_attributes(expression)%]
 
 **Example:**
 
