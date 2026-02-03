@@ -40,6 +40,8 @@ This variable contains the current bundle name.
 
 This variable contains the name of the bundle from which the current bundle was called.
 
+**Note:** An undefined variable indicates the bundle was activated by the `bundlequence`.
+
 **Example:**
 
 ```cf3 {file="example-this_calling_bundle.cf"}
