@@ -16,6 +16,12 @@
 #   DOCKER                  docker binary to use (default: docker)
 #   IMAGE_NAME              tag for the build image (default: cfengine-docs-hugo)
 #   SKIP_PUBLISH=1          skip the _publish.sh step (just build)
+#   SKIP_SERVE=1            don't start the serve container (site + search)
+#   SERVE_ONLY=1            skip the build; just (re)start the serve container
+#                           against the previously built site
+#   SITE_PORT               host port for the served site (default: 8000)
+#   SERVE_IMAGE             tag for the serve image (default: cfengine-docs-serve)
+#
 
 set -euo pipefail
 
@@ -35,6 +41,9 @@ PACKAGE_BUILD="${PACKAGE_BUILD:-n/a}"
 LTS_VERSION="${LTS_VERSION:-}"
 DOCKER="${DOCKER:-docker}"
 IMAGE_NAME="${IMAGE_NAME:-cfengine-docs-hugo}"
+SITE_PORT="${SITE_PORT:-8000}"
+SERVE_IMAGE="${SERVE_IMAGE:-cfengine-docs-serve}"
+SERVE_CONTAINER="cfengine-docs-serve"
 
 # repo_name url default_branch
 REPOS=(
@@ -43,7 +52,65 @@ REPOS=(
     "enterprise      git@github.com:cfengine/enterprise.git        master"
     "masterfiles     git@github.com:cfengine/masterfiles.git       master"
     "nt-docs         git@github.com:northerntechhq/nt-docs.git     main"
+    "infra           git@github.com:NorthernTechHQ/infra.git       master"
 )
+
+# Serve the built site plus a working search in one Docker container
+serve_site() {
+    local site_dir="$DOC_WORK/generator/_site"
+    local server_js="$WORK_DIR/infra/services/docs-cfengine-com/search-server/server.js"
+    local flex_pkg="$WORK_DIR/nt-docs/scripts/search/index/package.json"
+    local label="$BRANCH"
+    [ -n "$LTS_VERSION" ] && label="lts"
+
+    if [ ! -f "$server_js" ] || [ ! -d "$site_dir/assets/searchIndex" ]; then
+        echo "error: no built site (or no infra checkout) under tmp/; run a full build first" >&2
+        return 1
+    fi
+
+    echo "==> Building serve image $SERVE_IMAGE"
+    "$DOCKER" build --tag "$SERVE_IMAGE" "$SCRIPT_DIR/generator/serve"
+
+    echo "==> Starting serve container $SERVE_CONTAINER on port $SITE_PORT"
+    "$DOCKER" rm -f "$SERVE_CONTAINER" >/dev/null 2>&1 || true
+    "$DOCKER" run -d --name "$SERVE_CONTAINER" \
+        -p "$SITE_PORT:8000" \
+        -e DOCS_PATH=/docs \
+        -v "$site_dir:/site:ro" \
+        -v "$site_dir:/docs/$label:ro" \
+        -v "$server_js:/search/server.js:ro" \
+        "$SERVE_IMAGE" >/dev/null
+
+    local query_url="http://127.0.0.1:$SITE_PORT/docs/search/$label/?searchQuery=cfengine"
+    for _ in $(seq 1 15); do
+        if curl -fsS --max-time 60 "$query_url" >/dev/null 2>&1; then
+            echo "    search is up: $query_url"
+            return 0
+        fi
+        sleep 1
+    done
+    echo "    search did not respond; check: $DOCKER logs $SERVE_CONTAINER" >&2
+    return 1
+}
+
+# Block until Ctrl-C, then stop and remove the serve container.
+wait_serve() {
+    echo "    Press Ctrl-C to stop it."
+    trap '"$DOCKER" rm -f "$SERVE_CONTAINER" >/dev/null 2>&1 || true
+          echo "==> Stopped $SERVE_CONTAINER"; exit 0' INT TERM
+    # docker wait runs in the background so the interruptible `wait`
+    # builtin blocks instead — a trapped signal fires immediately.
+    "$DOCKER" wait "$SERVE_CONTAINER" >/dev/null 2>&1 &
+    wait $! || true
+}
+
+# start the serve container against an existing build, no rebuild.
+if [ -n "${SERVE_ONLY:-}" ]; then
+    serve_site
+    echo "==> Open http://127.0.0.1:$SITE_PORT/"
+    wait_serve
+    exit 0
+fi
 
 # 1. Clone (or update) the sibling repos under tmp/cache/, then export a
 #    clean working copy (no .git) to tmp/work/. We mount the .git-free
@@ -131,15 +198,29 @@ done
         "$PACKAGE_BUILD" "$LTS_VERSION"
 
 # 4. Optionally package the result (mirrors the Jenkins pipeline).
+# _publish.sh mutates _site in place for the offline archive, so restore it from packed-for-shipping.tar.gz (what production deploys) afterwards.
 if [ -z "${SKIP_PUBLISH:-}" ]; then
     echo "==> Packaging output"
-    "$DOCKER" run "${RUN_FLAGS[@]}" "$IMAGE_NAME" \
+    mkdir -p "$DOC_WORK/output"
+    "$DOCKER" run "${RUN_FLAGS[@]}" -v "$DOC_WORK/output:/nt/output" "$IMAGE_NAME" \
         bash -x documentation/generator/_scripts/_publish.sh "$BRANCH"
+    tar -xzf "$DOC_WORK/output/packed-for-shipping.tar.gz" -C "$DOC_WORK/generator"
+fi
+
+# 5. Serve the site with a working search (see serve_site above).
+if [ -z "${SKIP_SERVE:-}" ]; then
+    serve_site
 fi
 
 echo "==> Done. Generated site is in: $DOC_WORK/generator/_site"
 echo "    Tarballs (if packaged) are in: $DOC_WORK/output/"
-echo "    Start a webserver:"
-echo "    python3 -m http.server --directory $DOC_WORK/generator/_site/"
-echo "    And then open in your browser:"
-echo "    http://127.0.0.1:8000/"
+if [ -z "${SKIP_SERVE:-}" ]; then
+    echo "    Documentation is served at:"
+    echo "    http://127.0.0.1:$SITE_PORT/"
+    wait_serve
+else
+    echo "    Start a webserver (no search):"
+    echo "    python3 -m http.server --directory $DOC_WORK/generator/_site/"
+    echo "    And then open in your browser:"
+    echo "    http://127.0.0.1:8000/"
+fi

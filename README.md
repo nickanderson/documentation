@@ -37,12 +37,12 @@ content can cause merge conflicts that are hard to resolve.
 We provide a convenience script for building docs locally, using Docker;
 
 ```bash
-./build-locally.sh
+BRANCH=3.27.x ./build-locally.sh
 ```
 
 For now, this will only work for CFEngine team members - you need to be able to clone the private (enterprise) repos with SSH.
 
-When the script finishes, it gives you instructions for how to start a webserver and see the resulting docs page.
+When the script finishes, it starts a Docker container serving the resulting docs page at <http://127.0.0.1:8000/>. See the comments at the top of the script for options, e.g. `SERVE_ONLY=1` to restart the webserver without rebuilding, or `SKIP_SERVE=1` to not start it at all.
 
 ## Writing guidelines
 
