@@ -17,15 +17,16 @@ clean slate, and state from each execution compounds within the same agent
 run.
 
 - Classic arrays are cleared at the beginning of each bundle run.
-- Lists, strings, ints, reals, and data-containers are preserved but can be
-  re-defined if not guarded with `if => isvariable()`.
+- Lists, strings, ints, reals, and data-containers are preserved, but a
+  `vars` promise that runs again can still redefine them unless something
+  prevents it, such as guarding with `unless => isvariable()`.
 - `bundle` scoped classes are cleared at the end of the bundles execution
 - `namespace` scoped classes are not cleared automatically, though they can be
   explicitly undefined.
 
-Each bundle run can, however, return a scalar value to its caller, using
-the `methods` attribute [`useresult`][methods#useresult] together with the
-`reports` attribute [`bundle_return_value_index`][reports#bundle_return_value_index].
+A bundle run can return a scalar value to its caller, using the `methods`
+attribute [`useresult`][methods#useresult] together with the `reports`
+attribute [`bundle_return_value_index`][reports#bundle_return_value_index].
 
 Most promise types are only understood by one particular component, such as
 `cf-agent` or `cf-serverd`. The bundle _type_ declares which component's
