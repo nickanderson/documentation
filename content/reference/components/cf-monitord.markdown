@@ -135,27 +135,71 @@ into agent variables in the `$(mon.name)` context.
 
 ## Statistical classes
 
-`cf-monitord` automatically defines classes based on the observation of the data
-is has collected. Classes defined are named for the measurement id (the promise
-handle in the case of custom measurement promises) with prefixes and or suffixes
-depending on the measurement.
+`cf-monitord` automatically defines classes based on the data it has collected.
+Classes are named for the measurement id (the promise handle in the case of
+custom measurement promises), followed by a direction suffix and, for most
+samples, a level suffix.
 
-The following suffixes may be used when defining classes:
+Each sample is compared with two baselines: the expected value for the same
+time of the week (learned over previous weeks) and a recent, rolling average.
 
-- `_high` :: The last measurement seemed high. It was greater than the average of all time and also greater than the recent average. This could indicate that the measured value is experiencing a "spike" or trending in a positive direction.
-- `_low` :: The last measurement was low. It was lower than the average of all time and also lower than the recent average. This could indicate that the measured value is experiencing a "dip" or trending in a negative direction.
-- `_normal` :: The value was neither high nor low, (as per how those are described above).
-- `_ldt` :: A leap (step) detected, meaning a distinct (significant) change in the average.
-- `_dev1` :: The last measurement was at least 1 standard deviation higher/lower than the average.
-- `_dev2` :: The last measurement was at least 2 standard deviations higher/lower than the average. These classes are persistently defined for a number of minutes.
-- `_anomaly` :: The last measurement was at least 3 standard deviations than the average. These classes are persistently defined for a number of minutes.
-- `_microanomaly` :: The last measurement was at least 2 standard deviations higher than the average.
+The direction suffix says where the sample is relative to both baselines:
+
+- `_high` :: The last measurement was above both the weekly expectation and the
+  recent average.
+- `_low` :: The last measurement was below both the weekly expectation and the
+  recent average.
+- `_normal` :: The two baselines disagree: the measurement was above one and
+  below the other. This is typical just after a spike, when the measurement is
+  below the recent average again but still above the weekly expectation, and
+  while the weekly expectations are still being learned.
+
+The level suffix follows the direction suffix. It is based on the combined
+deviation from both baselines, each measured in its own standard deviations, so
+the steps are multiples of √2:
+
+- `_normal` :: The combined deviation is at most √2 (about 1.4).
+- `_dev1` :: The combined deviation is more than √2.
+- `_dev2` :: The combined deviation is more than 2√2 (about 2.8). `_dev1` is
+  also defined.
+- `_anomaly` :: The combined deviation is more than 3√2 (about 4.2). `_dev1`
+  and `_dev2` are also defined.
+- `_microanomaly` :: The measurement is less than 6 away from the weekly
+  expectation (see below), but the combined deviation is more than 2√2.
+
+Independently of the level, `cf-monitord` looks for a leap (step) in the last 10
+samples:
+
+- `_ldt` :: A leap was detected, meaning a distinct change in the average. Only
+  `_high_ldt` and `_low_ldt` are defined, relative to the weekly expectation.
+
+Classes with `_dev2`, `_anomaly`, `_microanomaly` and `_ldt` persist for 10
+minutes, so agent runs on a normal schedule see them. Classes with `_normal` and
+`_dev1` describe the current sample only.
+
+Two rules decide whether any of these classes are defined:
+
+- If either baseline has a standard deviation of 0, no classes are defined for
+  that measurement. A measurement that has always had the same value, for
+  example 0, never produces statistical classes.
+- A measurement less than 6 away from the weekly expectation, in the unit of
+  the measurement, never produces `_dev1`, `_dev2` or `_anomaly`. For such a
+  measurement only the direction class (for example `rootprocs_high`) and
+  possibly `_microanomaly` are defined. For custom measurements, choose a unit
+  where a difference worth noticing is larger than 6.
 
 The following prefixes may be used when defining classes:
 
 - `entropy_` ::
 
-Note: These suffixes and prefixes may be combined, resulting in a class like `rootprocs_high`, `loadavg_high_ldt`, `cpu1_high_dev3`, and `entropy_postgresql_out_low`.
+Examples of classes: `rootprocs_high_dev2`, `cpu1_high_anomaly`,
+`loadavg_high_ldt`, `syslog_normal_dev1`, `ssh_in_high_microanomaly` and
+`entropy_postgresql_out_low`.
+
+The values behind these classes are available as variables in the
+[`mon` context](../../special-variables/mon/): `mon.value_<id>` is the last
+measurement, `mon.av_<id>` the weekly expectation and `mon.dev_<id>` the
+combined standard deviation of both baselines.
 
 ## Control promises
 
